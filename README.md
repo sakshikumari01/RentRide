@@ -1,123 +1,542 @@
-# RentRide — Vehicle Rental Management System
+<div align="center">
 
-A full-stack vehicle rental platform built with the MERN stack (MongoDB, Express, React, Node.js). RentRide lets rental agencies manage their fleet, customers, bookings, payments, and analytics through a premium SaaS-style admin dashboard, while customers can search, book, and pay for vehicles through a polished storefront.
+# 🚗 RentRide
 
-## Tech stack
+### Full Stack Vehicle Rental Platform
 
-**Frontend:** React 19, Vite, Tailwind CSS, Framer Motion, React Router DOM, React Hook Form, Axios, TanStack Query, React Icons, Chart.js
+A modern full-stack vehicle rental platform that allows users to browse, book, and manage vehicle rentals with secure authentication, online payments, PDF receipts, email notifications, and WhatsApp receipt sharing.
 
-**Backend:** Node.js, Express.js, MongoDB, Mongoose, JWT, bcrypt, Cloudinary, Multer
+<p align="center">
+  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react" />
+  <img src="https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge&logo=node.js" />
+  <img src="https://img.shields.io/badge/Express.js-API-black?style=for-the-badge&logo=express" />
+  <img src="https://img.shields.io/badge/MongoDB-Database-green?style=for-the-badge&logo=mongodb" />
+  <img src="https://img.shields.io/badge/JWT-Authentication-blue?style=for-the-badge&logo=jsonwebtokens" />
+  <img src="https://img.shields.io/badge/TailwindCSS-UI-38B2AC?style=for-the-badge&logo=tailwind-css" />
+</p>
 
-**Security:** Helmet, express-rate-limit, CORS, express-mongo-sanitize, express-validator
+### 🚀 Live Demo
 
-## Project structure
+🌐 https://rent-ride-eta.vercel.app/
 
-```
-rentride/
-├── client/                  # React frontend
-│   └── src/
-│       ├── components/      # Reusable UI components (+ components/admin)
-│       ├── pages/           # Route-level pages (auth, customer, admin)
-│       ├── layouts/         # MainLayout, CustomerLayout, AdminLayout
-│       ├── hooks/           # useDebounce, usePagination, useClickOutside
-│       ├── context/         # AuthContext
-│       ├── services/        # Axios API service modules
-│       └── assets/
-├── server/                  # Express backend
-│   ├── controllers/         # Business logic per resource
-│   ├── models/              # Mongoose schemas (8 collections)
-│   ├── routes/               # Express routers
-│   ├── middleware/          # auth, validation, error handling, upload
-│   ├── config/               # db.js, cloudinary.js
-│   ├── utils/                # token, pricing, cloudinary upload helpers
-│   ├── seed.js                # Demo data seeder
-│   └── server.js
-├── docker-compose.yml
-├── vercel.json
-├── render.yaml
-└── README.md
-```
+> ⚠️ **Note:** This is a demo project built for learning and portfolio purposes. It is not a real vehicle rental platform.
 
-## Database collections
+</div>
 
-`Users` · `Vehicles` · `Bookings` · `Payments` · `RentalAgreements` · `Coupons` · `Reviews` · `Notifications`
+---
+# 👥 Project Team 
 
-## Getting started
+<table>
+<tr>
+<td align="center">
 
-### Prerequisites
-- Node.js 18+
-- MongoDB (local or Atlas)
-- A Cloudinary account (free tier works) for vehicle image uploads
+### 👨‍💻 Manas Mishra
+**Reg. No.: 12407408**
 
-### 1. Install dependencies
-```bash
-npm run install:all
-```
+**Role:** Full Stack Developer
 
-### 2. Configure environment variables
-Copy `server/.env.example` to `server/.env` and fill in your values:
-```bash
-cp server/.env.example server/.env
-```
+</td>
 
-### 3. Seed demo data (optional but recommended)
-```bash
-npm run seed
-```
-This creates an admin account (`admin@rentride.com` / `admin123`), a customer account (`customer@rentride.com` / `customer123`), 8 demo vehicles, and 2 coupons.
+<td align="center">
 
-### 4. Run the app
-In two terminals:
-```bash
-npm run dev:server   # http://localhost:5000
-npm run dev:client   # http://localhost:5173
-```
+### 👩‍💻 Sakshi Kumari
+**Reg. No.: 12407689**
 
-The Vite dev server proxies `/api` requests to the backend automatically (see `client/vite.config.js`).
+**Role:** Frontend Developer
 
-## API documentation
+</td>
 
-Base URL: `/api`
+<td align="center">
 
-| Resource | Endpoints |
-|---|---|
-| Auth | `POST /auth/register`, `POST /auth/login`, `GET /auth/me`, `POST /auth/forgot-password`, `POST /auth/reset-password`, `PUT /auth/profile`, `PUT /auth/change-password` |
-| Vehicles | `GET /vehicles`, `GET /vehicles/featured`, `GET /vehicles/categories`, `GET /vehicles/:id`, `POST /vehicles` (admin), `PUT /vehicles/:id` (admin), `DELETE /vehicles/:id` (admin) |
-| Bookings | `GET /bookings/availability`, `POST /bookings`, `GET /bookings/my-bookings`, `GET /bookings` (admin), `GET /bookings/:id`, `PUT /bookings/:id/status` (admin), `PUT /bookings/:id/cancel`, `PUT /bookings/:id/extend` |
-| Payments | `POST /payments/process`, `GET /payments/my-payments`, `GET /payments` (admin), `GET /payments/:id/invoice`, `PUT /payments/:id/refund-request`, `PUT /payments/:id/refund-process` (admin) |
-| Users | `GET /users` (admin), `GET /users/:id` (admin), `PUT /users/:id/status` (admin), `DELETE /users/:id` (admin), `GET /users/wishlist`, `POST /users/wishlist` |
-| Reviews | `POST /reviews`, `GET /reviews/vehicle/:vehicleId`, `DELETE /reviews/:id` |
-| Coupons | `POST /coupons/validate`, `GET /coupons` (admin), `POST /coupons` (admin), `PUT /coupons/:id` (admin), `DELETE /coupons/:id` (admin) |
-| Notifications | `GET /notifications`, `PUT /notifications/:id/read`, `PUT /notifications/read-all`, `DELETE /notifications/:id` |
-| Dashboard (admin) | `GET /dashboard/stats`, `GET /dashboard/revenue-chart`, `GET /dashboard/booking-chart`, `GET /dashboard/category-stats`, `GET /dashboard/top-vehicles` |
+### 👨‍💻 Kankipati Jnana Manikanta Devi Sriram
+**Reg. No.: 12407715**
 
-All protected routes require an `Authorization: Bearer <token>` header. Admin-only routes additionally require `role: "admin"` on the authenticated user.
+**Role:** Backend Developer
 
-## Core flows implemented
+</td>
+</tr>
+</table>
 
-- **Auth:** registration, login, forgot/reset password, JWT sessions, role-based route protection (admin vs customer)
-- **Fleet browsing:** search, category/price/transmission/fuel filters, sorting, pagination, wishlist
-- **Booking:** date-based availability checking, automatic price calculation (base price, discounts, coupons, 18% tax), rental agreement auto-generation
-- **Payments:** simulated card payment gateway, invoices, refund requests/processing
-- **Admin dashboard:** live stats, revenue trend chart, booking-status chart, category breakdown, recent activity feed, top vehicles report
-- **Admin management:** vehicle CRUD with multi-image Cloudinary upload, booking status management, customer activation/deactivation, coupon management
+# 📑 Table of Contents
+
+- Overview
+- Features
+- Tech Stack
+- Screenshots
+- Architecture
+- Folder Structure
+- Environment Variables
+- Installation
+- API Routes
+- Project Modules
+- Security Features
+- Deployment
+- Future Improvements
+- Author
+
+---
+
+# 📌 Overview
+
+RentRide is a modern full-stack vehicle rental platform developed using the MERN Stack.
+
+The platform enables users to:
+
+- Browse available vehicles
+- Book rental vehicles
+- Manage bookings
+- Make online payments
+- Receive PDF receipts
+- Receive Email confirmations
+- Receive WhatsApp booking receipts
+- Admin vehicle management
+
+The project demonstrates modern web development practices including authentication, REST APIs, MongoDB, payment workflow, cloud image uploads, PDF generation, and responsive UI.
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication
+
+- JWT Authentication
+- User Registration
+- User Login
+- Protected Routes
+- Password Encryption
+
+---
+
+## 🚘 Vehicle Management
+
+- Browse Vehicles
+- Featured Vehicles
+- Search Vehicles
+- Filter by Category
+- Filter by Price
+- Vehicle Details
+- Vehicle Images
+
+---
+
+## 📅 Booking System
+
+- Book Vehicles
+- Rental Duration
+- Booking History
+- Booking Status
+- Cancel Booking
+
+---
+
+## 💳 Payment Module
+
+- Payment Integration
+- Booking Confirmation
+- Payment Verification
+
+---
+
+## 📄 Receipt System
+
+- PDF Receipt Generation
+- Email Receipt
+- WhatsApp Receipt
+- Download Receipt
+
+---
+
+## 📧 Notifications
+
+- Email Confirmation
+- WhatsApp Notifications
+
+---
+
+## 👨‍💼 Admin Dashboard
+
+- Manage Vehicles
+- Manage Users
+- View Bookings
+- Dashboard Analytics
+
+---
+
+## 🎨 User Experience
+
+- Modern Responsive UI
+- Dark Theme
+- Mobile Friendly
+- Fast Navigation
+- Interactive Dashboard
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React.js
+- Vite
+- Tailwind CSS
+- Axios
+- React Router
+- React Hook Form
+- TanStack Query
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+
+---
+
+## Database
+
+- MongoDB
+- Mongoose
+
+---
+
+## Authentication
+
+- JWT
+- bcrypt
+
+---
+
+## Cloud Services
+
+- Cloudinary
+
+---
+
+## Notifications
+
+- Nodemailer
+- Twilio WhatsApp API
+
+---
+
+## PDF Generation
+
+- PDFKit
+
+---
 
 ## Deployment
 
-- **Docker:** `docker-compose up --build` runs MongoDB, the API, and the built frontend together (set `JWT_SECRET` and Cloudinary vars in a `.env` file at the project root first).
-- **Vercel:** `vercel.json` is configured to build the `client` as a static site.
-- **Render:** `render.yaml` defines a Node web service for the API and a static site for the client — connect your repo in the Render dashboard and set the listed environment variables.
+- Vercel
+- Render
+- MongoDB Atlas
 
-## Testing the payment simulator
+---
 
-The dummy payment gateway approves any card number except ones starting with `0000`, which simulates a failed transaction so you can test both success and failure states end-to-end.
+# 🖼 Application Screenshots
 
-## Notes on scope 
+## 🏠 Home Page
 
-This repository implements the complete core platform: authentication, fleet management, search/booking/payment/cancellation/extension flows, reviews, coupons, notifications, wishlists, and an analytics-driven admin dashboard, all wired to a real MongoDB backend. Some peripheral items from a full enterprise spec (e.g. PDF invoice generation, Swagger UI, automated test suites) are intentionally left as natural next additions — see "Next steps" below.
+<img width="1434" height="728" alt="image" src="https://github.com/user-attachments/assets/a025b511-d9d9-4e82-b1f8-cff58497d666" />
 
-### Suggested next steps
-- Add `pdfkit`/`puppeteer`-generated PDF invoices for the existing invoice data
-- Add Swagger/OpenAPI docs via `swagger-jsdoc` + `swagger-ui-express`
-- Add Jest/Supertest API tests and React Testing Library component tests
-- Add an ER diagram (the 8 Mongoose schemas above map directly to one)
+
+---
+
+## 🚗 Vehicle Listing
+
+<img width="1449" height="704" alt="image" src="https://github.com/user-attachments/assets/0831cc48-5fa1-4a09-8cff-0dd02d828ece" />
+
+
+---
+
+## 🚘 Vehicle Details
+
+<img width="1442" height="719" alt="image" src="https://github.com/user-attachments/assets/0c8b2d94-6447-4732-b59d-52e9680267d9" />
+
+
+---
+
+## 📅 Booking Page
+
+<img width="1181" height="582" alt="image" src="https://github.com/user-attachments/assets/1d045383-1739-4e69-a293-9d2f64c30dab" />
+
+
+---
+
+## 💳 Payment Page
+
+<img width="1337" height="568" alt="image" src="https://github.com/user-attachments/assets/b570b12e-4763-436f-9fb4-8eb66e561bcd" />
+
+
+---
+
+## 👤 User Dashboard
+
+<img width="1286" height="663" alt="image" src="https://github.com/user-attachments/assets/1eac8b1c-0be0-445d-a40a-3675cb29906a" />
+
+
+---
+
+
+
+# 🏗 Architecture
+
+```text
+React Frontend
+       │
+       ▼
+ REST API (Axios)
+       │
+       ▼
+Express Server
+       │
+       ▼
+MongoDB Atlas
+```
+
+---
+
+# 📂 Folder Structure
+
+```bash
+RentRide/
+
+├── client/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── server/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── receipts/
+│   ├── whatsapp/
+│   ├── uploads/
+│   └── server.js
+│
+├── docker-compose.yml
+├── Dockerfile
+├── render.yaml
+├── vercel.json
+└── README.md
+```
+
+---
+
+# 🔑 Environment Variables
+
+## Backend
+
+```env
+PORT=
+
+NODE_ENV=
+
+MONGO_URI=
+
+JWT_SECRET=
+
+CLIENT_URL=
+
+CLOUDINARY_CLOUD_NAME=
+
+CLOUDINARY_API_KEY=
+
+CLOUDINARY_API_SECRET=
+
+EMAIL_USER=
+
+EMAIL_PASS=
+
+TWILIO_ACCOUNT_SID=
+
+TWILIO_AUTH_TOKEN=
+
+TWILIO_FROM_WHATSAPP=
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/manash123-eng/RentRide.git
+```
+
+## Enter Folder
+
+```bash
+cd RentRide
+```
+
+## Install Backend
+
+```bash
+cd server
+npm install
+```
+
+## Install Frontend
+
+```bash
+cd ../client
+npm install
+```
+
+## Start Backend
+
+```bash
+cd ../server
+npm start
+```
+
+## Start Frontend
+
+```bash
+cd ../client
+npm run dev
+```
+
+---
+
+# 🔌 API Routes
+
+## Authentication
+
+| Method | Endpoint |
+|---------|----------|
+| POST | /api/auth/register |
+| POST | /api/auth/login |
+
+---
+
+## Vehicles
+
+| Method | Endpoint |
+|---------|----------|
+| GET | /api/vehicles |
+| GET | /api/vehicles/featured |
+| GET | /api/vehicles/:id |
+
+---
+
+## Booking
+
+| Method | Endpoint |
+|---------|----------|
+| POST | /api/bookings |
+| GET | /api/bookings |
+| PUT | /api/bookings/:id |
+
+---
+
+## Payments
+
+| Method | Endpoint |
+|---------|----------|
+| POST | /api/payments |
+
+---
+
+## Reviews
+
+| Method | Endpoint |
+|---------|----------|
+| POST | /api/reviews |
+| GET | /api/reviews |
+
+---
+
+# 📦 Project Modules
+
+- User Authentication
+- Vehicle Management
+- Booking System
+- Payment Module
+- Receipt Generation
+- Email Notifications
+- WhatsApp Notifications
+- Admin Dashboard
+- Cloud Image Upload
+- PDF Generator
+
+---
+
+# 🔒 Security Features
+
+- JWT Authentication
+- Password Encryption
+- Protected Routes
+- Secure REST APIs
+- Input Validation
+- CORS Protection
+- Environment Variables
+- Rate Limiting
+
+---
+
+# 🚀 Deployment
+
+## Frontend
+
+Vercel
+
+https://rent-ride-eta.vercel.app/
+
+---
+
+## Backend
+
+Render
+
+---
+
+## Database
+
+MongoDB Atlas
+
+---
+
+# 📈 Future Improvements
+
+- Razorpay Live Payment
+- Google Login
+- Vehicle Owner Dashboard
+- GPS Tracking
+- AI Recommendation System
+- Live Chat Support
+- Mobile App
+- Push Notifications
+- Coupon System
+- Multi-language Support
+
+---
+
+# 👨‍💻 Author
+
+## **Sakshi Kumari**
+
+### B.Tech CSE Student
+
+### Full Stack Developer
+
+GitHub:
+
+https://github.com/sakshikumari01
+
+
+
+---
+
+# ⭐ Support
+
+If you found this project helpful, please ⭐ star this repository.
+
+Feedback and contributions are always welcome!
