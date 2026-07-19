@@ -112,7 +112,7 @@ All protected routes require an `Authorization: Bearer <token>` header. Admin-on
 
 The dummy payment gateway approves any card number except ones starting with `0000`, which simulates a failed transaction so you can test both success and failure states end-to-end.
 
-## Notes on scope ##
+## Notes on scope 
 
 This repository implements the complete core platform: authentication, fleet management, search/booking/payment/cancellation/extension flows, reviews, coupons, notifications, wishlists, and an analytics-driven admin dashboard, all wired to a real MongoDB backend. Some peripheral items from a full enterprise spec (e.g. PDF invoice generation, Swagger UI, automated test suites) are intentionally left as natural next additions — see "Next steps" below.
 
